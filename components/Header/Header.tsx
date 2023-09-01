@@ -4,6 +4,7 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import Button from "../Button/Button";
 import { Abril_Fatface } from "next/font/google";
+import hover3d from "../../utils/hover";
 
 const abril = Abril_Fatface({
   subsets: ["latin"],
@@ -11,10 +12,25 @@ const abril = Abril_Fatface({
 });
 
 import { FaRocket, FaWallet } from "react-icons/fa";
+import { useRef } from "react";
 
 const Header = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const heroImageHover = hover3d(heroRef, {
+    x: 20,
+    y: -4,
+    z: 11,
+  });
+
+  const heroImageBoxHover = hover3d(heroRef, {
+    x: 30,
+    y: -40,
+    z: 30,
+  });
+
   return (
-    <div>
+    <div className={styles.headerStyled} ref={heroRef}>
       <nav className={styles.nav}>
         <div className={styles.logo}>
           <Image src={logo} width={36} alt="Application logo" />
@@ -63,12 +79,21 @@ const Header = () => {
           </div>
         </div>
         <div className={styles.imageContent}>
-          <div className={styles.image}>
+          <div
+            className={styles.image}
+            style={{
+              transform: heroImageBoxHover.transform,
+              transition: heroImageBoxHover.transition,
+            }}
+          >
             <Image
               src="/images/monkey.png"
               width={600}
               height={600}
               alt="Monkey Image Herobox"
+              style={{
+                transform: heroImageHover.transform,
+              }}
             />
           </div>
         </div>

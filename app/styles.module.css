@@ -77,7 +77,6 @@
 }
 
 .cards {
-  position: absolute;
   display: grid;
   grid-template-columns: repeat(6, 30rem);
   gap: 4rem;
